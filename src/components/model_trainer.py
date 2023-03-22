@@ -96,6 +96,7 @@ class ModelTrainer:
             model = models[best_model]
             model.fit(X_train, y_train)
             save_obj(self.model_trainer_config.saved_model_path, model)
+            save_obj(file_path=os.path.join("models", timestamp, "model.pkl"), obj = model)
             return True
         except Exception as e:
             print(Sys_error(e, sys))

@@ -73,6 +73,7 @@ class DataTransformation:
             save_numpy_array_data(self.data_transformation_config.train_arr_filepath, train_arr)
             save_numpy_array_data(self.data_transformation_config.test_arr_filepath, test_arr)
             save_obj(obj = preprocessor, file_path = self.data_transformation_config.preprocessor_obj_file_path)
+            save_obj(obj = preprocessor, file_path = os.path.join("models", timestamp, "preprocessor.pkl"))
             logging.info("Data Transformation Completed")
             
             return (self.data_transformation_config.train_arr_filepath, 

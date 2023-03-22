@@ -8,6 +8,7 @@ import sys, os
 def save_obj(file_path, obj):
     """Saving the object"""
     try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, 'wb') as f:
             pkl.dump(obj, f)
     except Exception as e:

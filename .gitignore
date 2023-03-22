@@ -1,6 +1,6 @@
 venv
-artifacts
 logs
 main.py
+artifacts
 app.py
 

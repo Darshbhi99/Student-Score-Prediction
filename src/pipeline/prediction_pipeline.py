@@ -17,8 +17,8 @@ def preprocessing_data(data, path):
 
 def predict_marks(data:dict, new_model = False):
     try:
-        latest_file = os.listdir("artifacts")[np.argmax([int(i) for i in os.listdir("artifacts")])]
-        pre_path = os.path.join("artifacts", latest_file, "data_transformation", "preprocessor.pkl")
+        latest_file = os.listdir("models")[np.argmax([int(i) for i in os.listdir("models")])]
+        pre_path = os.path.join("models", latest_file, "preprocessor.pkl")
         if new_model == True:
             training_pipeline = TrainingPipeline()
             path = training_pipeline.initialize_training_pipeline()
@@ -27,7 +27,7 @@ def predict_marks(data:dict, new_model = False):
             output = model.predict(pre_data)
             return output
         else:
-            mod_path = os.path.join("artifacts", latest_file, "model_trainer", "model.pkl")
+            mod_path = os.path.join("models", latest_file, "model.pkl")
             model = load_obj(mod_path)
             pre_data = preprocessing_data(data, pre_path)
             output = model.predict(pre_data)
