@@ -9,28 +9,30 @@ env:
 on:
   push: 
     branches:
-      - master
+      - main
+    paths-ignore:
+      - 'README.md'
 
 jobs:
-  name: my-ci-pipeline
-    runs-on: ubuntu-latest
+  my-ci-pipeline:
+      runs-on: ubuntu-latest
 
-    steps:
-    - name: Git clone our Repository
-      uses: actions/checkout@v1
+      steps:
+      - name: Git clone our Repository
+        uses: actions/checkout@v1
 
-    - name: Create ZIP Deployment Package
-      runs: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git* *.ebextentions*
+      - name: Create ZIP Deployment Package
+        runs: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git* *.ebextentions*
 
-    - name: Configure my AWS CREDENTIALS
-      uses: aws-actions/configure-aws-credentials@v1
-      with: 
-        aws-access-key-id    : ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region           : ${{ env.AWS_REGION_NAME }}
+      - name: Configure my AWS CREDENTIALS
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id    : ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region           : ${{ env.AWS_REGION_NAME }}
 
-    - name: Copy our Deployment package to S3 Bucket
-      run : aws s3 copy ${{ env.DEPLOY_PACKAGE_NAME }} s3://{{env.AWS_S3_BUCKET_NAME}}
+      - name: Copy our Deployment package to S3 Bucket
+        run : aws s3 copy ${{ env.DEPLOY_PACKAGE_NAME }} s3://{{env.AWS_S3_BUCKET_NAME}}
 
     - name: Message of completion CI Pipeline
       run : echo "CI Pipeline part completed successfully"
