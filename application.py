@@ -20,7 +20,7 @@ def prediction():
         dct["race_ethnicity"] = request.form["ethnicity"]
         dct["lunch"] = request.form["lunch"]
         dct["test_preparation_course"] = request.form["test_preparation_course"]
-        pred = predict_marks(dct, new_model = False)
+        pred = predict_marks(dct, new_model = True)
         return render_template("home.html", results = pred[0])
     
 if __name__ == "__main__":
