@@ -1,14 +1,14 @@
 from flask import Flask, request, render_template
 from src.pipeline.prediction_pipeline import predict_marks
 
-app = Flask(__name__)
+application = Flask(__name__)
 dct = {}
 
-@app.route("/")
+@application.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/predict", methods=['GET', 'POST'])
+@application.route("/predict", methods=['GET', 'POST'])
 def prediction():
     if request.method == 'GET':
         return render_template("home.html")
@@ -24,4 +24,4 @@ def prediction():
         return render_template("home.html", results = pred[0])
     
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    application.run(host="0.0.0.0")
