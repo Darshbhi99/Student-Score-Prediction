@@ -1,0 +1,8 @@
+README.md
+setup.py
+score_prediction.egg-info/PKG-INFO
+score_prediction.egg-info/SOURCES.txt
+score_prediction.egg-info/dependency_links.txt
+score_prediction.egg-info/requires.txt
+score_prediction.egg-info/top_level.txt
+src/__init__.py
